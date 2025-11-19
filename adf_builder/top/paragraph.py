@@ -1,20 +1,19 @@
-from .base import TopLevelNode
+from adf_builder.base import TopLevelNode, InlineNode
 
 
-class ADFDocument:
+class Paragraph(TopLevelNode):
 
-    def __init__(self, *args: TopLevelNode):
-        self._payload: dict = {
-            "version": 1,
-            "type": "doc",
+    def __init__(self, *args: InlineNode):
+        super().__init__()
+        self._payload = {
+            "type": "paragraph"
         }
-        self._content = []
-        for provided_arg in args:
+        for inline_node in args:
             self._content.append(
-                provided_arg
+                inline_node
             )
 
-    def build(self):
+    def to_dict(self):
         payload = self._payload.copy()
         json_content = []
         for node in self._content:
