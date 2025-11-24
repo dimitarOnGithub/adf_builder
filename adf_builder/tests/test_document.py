@@ -243,3 +243,45 @@ class TestADFDocument:
                 }
             ]
         }
+
+    def test_dynamic_doc(self):
+        doc = ADFDocument()
+        for i in range(1, 4):
+            doc.add(
+                Paragraph(
+                    Text(f"A line of text {i}")
+                )
+            )
+        assert doc.build() == {
+            "version": 1,
+            "type": "doc",
+            "content": [
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "A line of text 1"
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "A line of text 2"
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "A line of text 3"
+                        }
+                    ]
+                }
+            ]
+        }

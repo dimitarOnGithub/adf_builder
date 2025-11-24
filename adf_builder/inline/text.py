@@ -29,6 +29,10 @@ class Text(InlineNode):
             for existing_mark in self._marks:
                 if isinstance(existing_mark, Link) or existing_mark == MarkEnum.CODE:
                     raise ValueError("Color cannot be set for links or code blocks")
+        if isinstance(mark_type, Link):
+            for existing_mark in self._marks:
+                if isinstance(existing_mark, Color):
+                    raise ValueError("Link cannot be set for text that has already been marked with color")
         self._marks.append(
             mark_type
         )

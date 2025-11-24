@@ -14,6 +14,9 @@ class ADFDocument:
                 provided_arg
             )
 
+    def add(self, node: TopLevelNode):
+        self._content.append(node)
+
     def build(self):
         payload = self._payload.copy()
         json_content = []
